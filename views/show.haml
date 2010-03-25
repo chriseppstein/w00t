@@ -1,0 +1,39 @@
+!!!
+%html
+  %head
+    %title= @w00t
+    %style(type="text/css")
+      :plain
+        h1 { font-size: #{font_size}px; }
+      :sass
+        @font-face
+          font-family: 'computer'
+          src: local('computer'), url(fonts/game_over.ttf)
+        body
+          font-family: 'computer', 'Courier New'
+        a[rel="previous"]
+          float: left
+        a[rel="next"]
+          float: right
+        h1
+          clear: both
+        h1, .links
+          text-align: center
+    - if @js
+      :javascript
+        function w00tify() {
+          var w00t = ["w"];
+          for (var i = 0; i < #{@zero_count}; i++) {
+            w00t.push("0");
+          }
+          w00t.push("t");
+          document.getElementById("w00t").innerHTML = w00t.join("&shy;");
+        }
+  %body{:onload=>("w00tify()" if @js)}
+    - if @w0t
+      %a(rel="previous" href="/#{@w0t}" title="w 0x#{@zero_count - 1} t") Previous
+    %a(rel="next" href="/#{@w000t}" title="w 0x#{@zero_count + 1} t") Next
+    .links
+      %a(rel="self" href="/#{@w00t_url}") Link
+      %a{:href=>"http://twitter.com/?status=http://w00t.eppsteins.net/#{@w00t_short_url}"} Tweet
+    %h1#w00t(title="w 0x#{@zero_count} t")= @w00t_html
